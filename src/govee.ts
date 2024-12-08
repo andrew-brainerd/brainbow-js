@@ -46,6 +46,30 @@ export const getLightIds = async () => {
   }
 };
 
+export const getRandomInt = (max: number, min = 0) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+export const setLightColor = async (light: GoveeDevice, color: number) => {
+  const data = JSON.stringify({
+    requestId: uuid(),
+    payload: {
+      sku: light.sku,
+      device: light.device,
+      capability: {
+        type: 'devices.capabilities.color_setting',
+        instance: 'colorRgb',
+        value: color
+      }
+    }
+  });
+
+  const response = await goveeClient('/device/control', 'POST', data);
+
+  if (response.ok) {
+    const json = await response.json();
+    return json;
+  }
+};
+
 export const setLightPower = async (light: GoveeDevice, value: 'on' | 'off') => {
   const data = JSON.stringify({
     requestId: uuid(),

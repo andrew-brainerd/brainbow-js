@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      cie-rgb-color-converter:
+        specifier: ^1.0.6
+        version: 1.0.6
       eventsource:
         specifier: ^3.0.1
         version: 3.0.1
@@ -17,8 +20,18 @@ importers:
       uuid:
         specifier: ^11.0.3
         version: 11.0.3
+    devDependencies:
+      '@types/cie-rgb-color-converter':
+        specifier: ^1.0.0
+        version: 1.0.0
 
 packages:
+
+  '@types/cie-rgb-color-converter@1.0.0':
+    resolution: {integrity: sha512-ZeLsd/aV0ziQQMEsGCRbHU1uNK60jUYK6fxLqIb4znVpg2tCpcD6/w5sRRuytq58YvnPgjvxFJFTJlEijUOkSQ==}
+
+  cie-rgb-color-converter@1.0.6:
+    resolution: {integrity: sha512-ox9KQRf1i8jFhE1d0cZGwGLyRWy03oFLUhXqr9XrD4XACNezejiarj/4VZnYcYHOifQcmY/JIC0HB1Nkv+nFZQ==}
 
   eventsource-parser@3.0.0:
     resolution: {integrity: sha512-T1C0XCUimhxVQzW4zFipdx0SficT651NnkR0ZSH3yQwh+mFMdLfgjABVi4YtMTtaL4s168593DaoaRLMqryavA==}
@@ -37,6 +50,10 @@ packages:
     hasBin: true
 
 snapshots:
+
+  '@types/cie-rgb-color-converter@1.0.0': {}
+
+  cie-rgb-color-converter@1.0.6: {}
 
   eventsource-parser@3.0.0: {}
 

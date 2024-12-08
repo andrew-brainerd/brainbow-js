@@ -1,7 +1,14 @@
+import ColorConverter from 'cie-rgb-color-converter';
 import { EventSource } from 'eventsource';
 import { fetch, Agent } from 'undici';
 
-import { getDevices, getLightIds, getLights, setLightPower } from './govee';
+const OFFICE_LIGHT_ID = '141eb238-9305-4677-a8a4-5a0dbef185ec';
+
+import { getLights, setLightColor, setLightPower } from './govee';
+
+let eventCount = 0;
+
+const MAX_GOVEE_VALUE = 16777215;
 
 interface HueMessage {
   creationtime: string;
@@ -37,37 +44,49 @@ const customFetch = (url: string | URL) => {
   });
 };
 
-console.log('Starting event monitor...');
+const convertHueToGovee = (hueColor: HueColor) => {
+  const { x, y } = hueColor.xy;
+  const rgb = ColorConverter.xyBriToRgb(x, y, 75);
+  const value = (rgb.r * 256 + rgb.g) * 256 + rgb.b;
 
-const initHueMonitor = () => {
+  console.log(`${eventCount}) Updating color`, { hueColor, rgb, value, isValid: value <= MAX_GOVEE_VALUE });
+
+  if (value > MAX_GOVEE_VALUE) {
+    return 0;
+  }
+
+  return value;
+};
+
+const initHueMonitor = async () => {
+  const lights = await getLights();
+
+  if (lights) {
+    await Promise.all([lights.map(light => setLightPower(light, 'on'))]);
+  }
+
   const eventSource = new EventSource('https://10.0.0.195/eventstream/clip/v2', {
     withCredentials: true,
     fetch: customFetch
   });
 
-  /*
-   * This will listen for events with the field `event: notice`.
-   */
-  eventSource.addEventListener('notice', event => {
-    console.log('\n\nNotice Event:', event.data);
-  });
-
-  /*
-   * This will listen for events with the field `event: update`.
-   */
-  eventSource.addEventListener('update', event => {
-    console.log('\n\nUpdate Event:', event.data);
-  });
-
-  /*
-   * The event "message" is a special case, as it will capture events _without_ an
-   * event field, as well as events that have the specific type `event: message`.
-   * It will not trigger on any other event type.
-   */
   eventSource.addEventListener('message', event => {
     const hueEvents = JSON.parse(event.data) as HueMessage[];
 
-    hueEvents.forEach(hueEvent => console.log('\n\nMessage Event:', JSON.stringify(hueEvent, null, 2)));
+    hueEvents.forEach(async hueEvent => {
+      const colorEvent = hueEvent.data.find(eventData => !!eventData.color);
+
+      if (colorEvent) {
+        if (lights && colorEvent.id === OFFICE_LIGHT_ID) {
+          // console.log('\n\nMessage Event:', JSON.stringify(colorEvent.color, null, 2));
+          const color = convertHueToGovee(colorEvent.color);
+          await Promise.all(lights.map(async light => await setLightColor(light, color)));
+        }
+        eventCount++;
+      } else {
+        // console.log('\n\nMessage Event:', JSON.stringify(hueEvent, null, 2));
+      }
+    });
   });
 
   eventSource.addEventListener('error', err => {
@@ -75,12 +94,4 @@ const initHueMonitor = () => {
   });
 };
 
-const initGovee = async () => {
-  const lights = await getLights();
-
-  if (lights) {
-    Promise.all([lights.map(light => setLightPower(light, 'on'))])
-  }
-};
-
-initGovee();
+initHueMonitor();

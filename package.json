@@ -10,8 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cie-rgb-color-converter": "^1.0.6",
     "eventsource": "^3.0.1",
     "undici": "^7.1.0",
     "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/cie-rgb-color-converter": "^1.0.0"
   }
 }
