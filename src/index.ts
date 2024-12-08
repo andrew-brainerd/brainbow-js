@@ -1,7 +1,7 @@
 import { EventSource } from 'eventsource';
 import { fetch, Agent } from 'undici';
 
-import { getDevices, getLightIds, getLights } from './govee';
+import { getDevices, getLightIds, getLights, setLightPower } from './govee';
 
 interface HueMessage {
   creationtime: string;
@@ -39,44 +39,48 @@ const customFetch = (url: string | URL) => {
 
 console.log('Starting event monitor...');
 
-const eventSource = new EventSource('https://10.0.0.195/eventstream/clip/v2', {
-  withCredentials: true,
-  fetch: customFetch
-});
+const initHueMonitor = () => {
+  const eventSource = new EventSource('https://10.0.0.195/eventstream/clip/v2', {
+    withCredentials: true,
+    fetch: customFetch
+  });
 
-/*
- * This will listen for events with the field `event: notice`.
- */
-eventSource.addEventListener('notice', event => {
-  console.log('\n\nNotice Event:', event.data);
-});
+  /*
+   * This will listen for events with the field `event: notice`.
+   */
+  eventSource.addEventListener('notice', event => {
+    console.log('\n\nNotice Event:', event.data);
+  });
 
-/*
- * This will listen for events with the field `event: update`.
- */
-eventSource.addEventListener('update', event => {
-  console.log('\n\nUpdate Event:', event.data);
-});
+  /*
+   * This will listen for events with the field `event: update`.
+   */
+  eventSource.addEventListener('update', event => {
+    console.log('\n\nUpdate Event:', event.data);
+  });
 
-/*
- * The event "message" is a special case, as it will capture events _without_ an
- * event field, as well as events that have the specific type `event: message`.
- * It will not trigger on any other event type.
- */
-eventSource.addEventListener('message', event => {
-  const hueEvents = JSON.parse(event.data) as HueMessage[];
+  /*
+   * The event "message" is a special case, as it will capture events _without_ an
+   * event field, as well as events that have the specific type `event: message`.
+   * It will not trigger on any other event type.
+   */
+  eventSource.addEventListener('message', event => {
+    const hueEvents = JSON.parse(event.data) as HueMessage[];
 
-  hueEvents.forEach(hueEvent => console.log('\n\nMessage Event:', JSON.stringify(hueEvent, null, 2)));
-});
+    hueEvents.forEach(hueEvent => console.log('\n\nMessage Event:', JSON.stringify(hueEvent, null, 2)));
+  });
 
-eventSource.addEventListener('error', err => {
-  console.error(err);
-});
+  eventSource.addEventListener('error', err => {
+    console.error(err);
+  });
+};
 
 const initGovee = async () => {
-  const lights = await getLightIds();
+  const lights = await getLights();
 
-  console.log('Lights', lights);
+  if (lights) {
+    Promise.all([lights.map(light => setLightPower(light, 'on'))])
+  }
 };
 
 initGovee();

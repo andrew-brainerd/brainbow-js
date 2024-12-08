@@ -14,6 +14,9 @@ importers:
       undici:
         specifier: ^7.1.0
         version: 7.1.0
+      uuid:
+        specifier: ^11.0.3
+        version: 11.0.3
 
 packages:
 
@@ -29,6 +32,10 @@ packages:
     resolution: {integrity: sha512-3+mdX2R31khuLCm2mKExSlMdJsfol7bJkIMH80tdXA74W34rT1jKemUTlYR7WY3TqsV4wfOgpatWmmB2Jl1+5g==}
     engines: {node: '>=20.18.1'}
 
+  uuid@11.0.3:
+    resolution: {integrity: sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==}
+    hasBin: true
+
 snapshots:
 
   eventsource-parser@3.0.0: {}
@@ -38,3 +45,5 @@ snapshots:
       eventsource-parser: 3.0.0
 
   undici@7.1.0: {}
+
+  uuid@11.0.3: {}
