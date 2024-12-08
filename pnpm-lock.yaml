@@ -14,6 +14,9 @@ importers:
       eventsource:
         specifier: ^3.0.1
         version: 3.0.1
+      node-dtls-client:
+        specifier: ^1.1.1
+        version: 1.1.1
       undici:
         specifier: ^7.1.0
         version: 7.1.0
@@ -24,6 +27,9 @@ importers:
       '@types/cie-rgb-color-converter':
         specifier: ^1.0.0
         version: 1.0.0
+      '@types/node':
+        specifier: ^22.10.1
+        version: 22.10.1
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -33,8 +39,20 @@ packages:
   '@types/cie-rgb-color-converter@1.0.0':
     resolution: {integrity: sha512-ZeLsd/aV0ziQQMEsGCRbHU1uNK60jUYK6fxLqIb4znVpg2tCpcD6/w5sRRuytq58YvnPgjvxFJFTJlEijUOkSQ==}
 
+  '@types/node@22.10.1':
+    resolution: {integrity: sha512-qKgsUwfHZV2WCWLAnVP1JqnpE6Im6h3Y0+fYgMTasNQ7V++CBX5OT1as0g0f+OyubbFqhf6XVNIsmN4IIhEgGQ==}
+
   cie-rgb-color-converter@1.0.6:
     resolution: {integrity: sha512-ox9KQRf1i8jFhE1d0cZGwGLyRWy03oFLUhXqr9XrD4XACNezejiarj/4VZnYcYHOifQcmY/JIC0HB1Nkv+nFZQ==}
+
+  debug@4.4.0:
+    resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
 
   eventsource-parser@3.0.0:
     resolution: {integrity: sha512-T1C0XCUimhxVQzW4zFipdx0SficT651NnkR0ZSH3yQwh+mFMdLfgjABVi4YtMTtaL4s168593DaoaRLMqryavA==}
@@ -44,10 +62,106 @@ packages:
     resolution: {integrity: sha512-tyGtsrTc9fi+N5qFU6G2MLjcBbsdCOQ/QE9Cc96Mt6q02YkQrIJGOaNMg6qiXRJDzxecN7BntJYNRE/j0OIhMQ==}
     engines: {node: '>=18.0.0'}
 
+  ms@2.1.3:
+    resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
+
+  node-aead-crypto-android-arm-eabi@3.0.1:
+    resolution: {integrity: sha512-bIAOQpwVPiAdi558WCOtbRQxjdQaQysLB12zzgb4LxXzNelNfQCx7gl/lBtQtsDd+MXTWW/acURM9X8c0Y627Q==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [android]
+
+  node-aead-crypto-android-arm64@3.0.1:
+    resolution: {integrity: sha512-EzKow9IduaOatF1hxoi2aNu+a70q7LtVVs/H04VcUBe93FbSuLRtSSOnEmvwwBProz2FV9Y0WhFrAbM+ruRXbA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [android]
+
+  node-aead-crypto-darwin-arm64@3.0.1:
+    resolution: {integrity: sha512-qb5jCE5xfKWJGNwFGhzpcdEZf16RDXOpHu2zckM1rZw4xpfZpSaIzU5J6mBTHzuYfQJrpQSj/sZPuFGIjqEvBA==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
+  node-aead-crypto-darwin-universal@3.0.1:
+    resolution: {integrity: sha512-0v44Z90wONd3B9KLPMWDi7p5IZLQUPBY27X9k2R9ZBuIgK00Zkyfd995xgaHeLPN8VLiddg5UmqdOISY88reMQ==}
+    engines: {node: '>= 10'}
+    os: [darwin]
+
+  node-aead-crypto-darwin-x64@3.0.1:
+    resolution: {integrity: sha512-Co6T1sb9R0W6uxlDwnLRlmCP2+5ZKYlQYAY5cWMaTC3RApZY2Qz7GlsK3+6hBaGr8iu4BG2Qdvb5gpS9A9ngLQ==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+
+  node-aead-crypto-linux-arm-gnueabihf@3.0.1:
+    resolution: {integrity: sha512-5sZobc1hqIQyULpaOVXw6Q+UIgMRIX3/CzHrCvvmWdc9LXG7ZZ7jzv5F8uTXBtJMXBVm3JdmD5bcu80uy9hfPg==}
+    engines: {node: '>= 10'}
+    cpu: [arm]
+    os: [linux]
+
+  node-aead-crypto-linux-arm64-gnu@3.0.1:
+    resolution: {integrity: sha512-cieHU0schCllZlDj54SKlYYknZSqBB83K44mFrIjfA/QLo1LQ5vgzpL7xZZLYe82HdcHRtVBLn9zfl1rtb3x+w==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  node-aead-crypto-linux-arm64-musl@3.0.1:
+    resolution: {integrity: sha512-NU2gUYA4cueaxXtULB4h+a85UIHLB6oH7lt9qHNSQtWkFesoQSUBStmzukX75zhNBI7tvi1Z+jukUrOPYe2ixQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  node-aead-crypto-linux-x64-gnu@3.0.1:
+    resolution: {integrity: sha512-KK+JrrtagnpzBsOofLE+kAf5reB5LGllh1Sdxknccg0e9oQEsL5dzTCjof5iMSdKZEBBKGrWxftMl8UxAR56Jg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  node-aead-crypto-linux-x64-musl@3.0.1:
+    resolution: {integrity: sha512-CniTRbq1q+qaN2a0MB3PYZZVYVl7rS54MxT9gMaOBEd7KuG5dXry7G/cwwbJ0oR3Agjyt2mTWcW36SjJPudKXw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  node-aead-crypto-win32-arm64-msvc@3.0.1:
+    resolution: {integrity: sha512-zDpx5flNM+v9rwN1qwtHudubEqTDtALkL6aCX+KwBG2uccV/PNFsy9imCDyLT86A/7D+U6WPZCpafZgN+w2aBg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
+  node-aead-crypto-win32-ia32-msvc@3.0.1:
+    resolution: {integrity: sha512-XD3iIsFG4kWn+XT3PabblNmejS3rNjKAkihCM6R1nPHpGLZFKOPpkummRBi0dWs3s01cV6jx59YG2r1FsZwJ0g==}
+    engines: {node: '>= 10'}
+    cpu: [ia32]
+    os: [win32]
+
+  node-aead-crypto-win32-x64-msvc@3.0.1:
+    resolution: {integrity: sha512-I2rehJKYEDXlA2uf3Z/Cnjtg74ClO3cjZhpW/SVKHGfSnxSvLK7BJ3yNAV6x+XpaHBYJMlRvWZqnHqgaHuxWUA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+
+  node-aead-crypto@3.0.1:
+    resolution: {integrity: sha512-z1PSiyueg0Demr4iLJ5pqoB1NDP9OsBrsSiGGNx3GaQDBOWY2wyVjS4xRCPiWEN/yu3pgb2PklqaksW1Z4L8aw==}
+    engines: {node: '>= 10'}
+
+  node-dtls-client@1.1.1:
+    resolution: {integrity: sha512-kwQ8j5OW/cWCcLeFbUC8dyXXXMYetfIFC132wK8BzaUVr7izKWVeVrbYhUsl7yLh+qCrhf+bI3+fu2viTIJajA==}
+    engines: {node: '>=12'}
+
+  semver@7.6.3:
+    resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   typescript@5.7.2:
     resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  undici-types@6.20.0:
+    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
 
   undici@7.1.0:
     resolution: {integrity: sha512-3+mdX2R31khuLCm2mKExSlMdJsfol7bJkIMH80tdXA74W34rT1jKemUTlYR7WY3TqsV4wfOgpatWmmB2Jl1+5g==}
@@ -61,7 +175,15 @@ snapshots:
 
   '@types/cie-rgb-color-converter@1.0.0': {}
 
+  '@types/node@22.10.1':
+    dependencies:
+      undici-types: 6.20.0
+
   cie-rgb-color-converter@1.0.6: {}
+
+  debug@4.4.0:
+    dependencies:
+      ms: 2.1.3
 
   eventsource-parser@3.0.0: {}
 
@@ -69,7 +191,78 @@ snapshots:
     dependencies:
       eventsource-parser: 3.0.0
 
+  ms@2.1.3: {}
+
+  node-aead-crypto-android-arm-eabi@3.0.1:
+    optional: true
+
+  node-aead-crypto-android-arm64@3.0.1:
+    optional: true
+
+  node-aead-crypto-darwin-arm64@3.0.1:
+    optional: true
+
+  node-aead-crypto-darwin-universal@3.0.1:
+    optional: true
+
+  node-aead-crypto-darwin-x64@3.0.1:
+    optional: true
+
+  node-aead-crypto-linux-arm-gnueabihf@3.0.1:
+    optional: true
+
+  node-aead-crypto-linux-arm64-gnu@3.0.1:
+    optional: true
+
+  node-aead-crypto-linux-arm64-musl@3.0.1:
+    optional: true
+
+  node-aead-crypto-linux-x64-gnu@3.0.1:
+    optional: true
+
+  node-aead-crypto-linux-x64-musl@3.0.1:
+    optional: true
+
+  node-aead-crypto-win32-arm64-msvc@3.0.1:
+    optional: true
+
+  node-aead-crypto-win32-ia32-msvc@3.0.1:
+    optional: true
+
+  node-aead-crypto-win32-x64-msvc@3.0.1:
+    optional: true
+
+  node-aead-crypto@3.0.1:
+    optionalDependencies:
+      node-aead-crypto-android-arm-eabi: 3.0.1
+      node-aead-crypto-android-arm64: 3.0.1
+      node-aead-crypto-darwin-arm64: 3.0.1
+      node-aead-crypto-darwin-universal: 3.0.1
+      node-aead-crypto-darwin-x64: 3.0.1
+      node-aead-crypto-linux-arm-gnueabihf: 3.0.1
+      node-aead-crypto-linux-arm64-gnu: 3.0.1
+      node-aead-crypto-linux-arm64-musl: 3.0.1
+      node-aead-crypto-linux-x64-gnu: 3.0.1
+      node-aead-crypto-linux-x64-musl: 3.0.1
+      node-aead-crypto-win32-arm64-msvc: 3.0.1
+      node-aead-crypto-win32-ia32-msvc: 3.0.1
+      node-aead-crypto-win32-x64-msvc: 3.0.1
+    optional: true
+
+  node-dtls-client@1.1.1:
+    dependencies:
+      debug: 4.4.0
+      semver: 7.6.3
+    optionalDependencies:
+      node-aead-crypto: 3.0.1
+    transitivePeerDependencies:
+      - supports-color
+
+  semver@7.6.3: {}
+
   typescript@5.7.2: {}
+
+  undici-types@6.20.0: {}
 
   undici@7.1.0: {}
 
