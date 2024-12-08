@@ -1,15 +1,28 @@
 {
   "compilerOptions": {
-    "lib": ["es2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "es2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "NodeNext",
     "moduleDetection": "force",
     "moduleResolution": "NodeNext",
-    "noEmit": true,
     "noUncheckedIndexedAccess": true,
+    "paths": {
+      "constants/*": ["./src/constants/*"],
+      "lib/*": ["./src/lib/*"],
+      "types/*": ["./src/types/*"],
+      "utils/*": ["./src/utils/*"]
+    },
     "resolveJsonModule": true,
+    "rootDir": "./src",
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "ES2022",
-  }
+    "target": "ES2022"
+  },
+  "include": [
+    "src"
+  ]
 }

@@ -24,6 +24,9 @@ importers:
       '@types/cie-rgb-color-converter':
         specifier: ^1.0.0
         version: 1.0.0
+      typescript:
+        specifier: ^5.7.2
+        version: 5.7.2
 
 packages:
 
@@ -40,6 +43,11 @@ packages:
   eventsource@3.0.1:
     resolution: {integrity: sha512-tyGtsrTc9fi+N5qFU6G2MLjcBbsdCOQ/QE9Cc96Mt6q02YkQrIJGOaNMg6qiXRJDzxecN7BntJYNRE/j0OIhMQ==}
     engines: {node: '>=18.0.0'}
+
+  typescript@5.7.2:
+    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
+    engines: {node: '>=14.17'}
+    hasBin: true
 
   undici@7.1.0:
     resolution: {integrity: sha512-3+mdX2R31khuLCm2mKExSlMdJsfol7bJkIMH80tdXA74W34rT1jKemUTlYR7WY3TqsV4wfOgpatWmmB2Jl1+5g==}
@@ -60,6 +68,8 @@ snapshots:
   eventsource@3.0.1:
     dependencies:
       eventsource-parser: 3.0.0
+
+  typescript@5.7.2: {}
 
   undici@7.1.0: {}
 
