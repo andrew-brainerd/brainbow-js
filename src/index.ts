@@ -1,7 +1,7 @@
 import { EventSource } from 'eventsource';
 import { fetch, Agent } from 'undici';
 
-import { getDevices } from './govee';
+import { getDevices, getLightIds, getLights } from './govee';
 
 interface HueMessage {
   creationtime: string;
@@ -74,9 +74,9 @@ eventSource.addEventListener('error', err => {
 });
 
 const initGovee = async () => {
-  const devices = await getDevices();
+  const lights = await getLightIds();
 
-  console.log('Devices', devices);
+  console.log('Lights', lights);
 };
 
 initGovee();
